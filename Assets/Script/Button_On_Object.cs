@@ -14,7 +14,6 @@ public class Button_On_Object : MonoBehaviour
     private void Update()
     {
         Vector3 Oject_UI_Position = MainCamera.WorldToScreenPoint(ObjectTransform.position);
-        _button.transform.position = new Vector3(Oject_UI_Position.x, Oject_UI_Position.y + Distance_Object_Button_y, Oject_UI_Position.z); 
-        Debug.Log(Oject_UI_Position);
+        _button.transform.position = new Vector3(Oject_UI_Position.x, Oject_UI_Position.y + Distance_Object_Button_y, Oject_UI_Position.z);
     }
 }

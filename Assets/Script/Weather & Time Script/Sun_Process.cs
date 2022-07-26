@@ -11,14 +11,14 @@ public class Sun_Process : MonoBehaviour
     void Start()
     {
         
-        sun_Rotation_Speed =  360 / GameData.Day_Lengh_In_Real_Minutes / 60  ; 
+        sun_Rotation_Speed =  360 / TimeData.Day_Lengh_In_Real_Minutes / 60  ; 
     }
 
     void Update()
     {
         Sun_Transform.Rotate(1* (sun_Rotation_Speed*Time.deltaTime),0,0);
 
-        if ( GameData.Hours > 21)
+        if ( TimeData.Hours > 21)
         {
             
         }
