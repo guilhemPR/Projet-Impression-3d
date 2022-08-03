@@ -17,9 +17,16 @@ public class Time_Process : MonoBehaviour
     private float InGame_Day_In_Seconds;
     private float TimeConverter;
     public string ClockString;
-    
+
+    private float _secondinGame;
+    private float testsecond; 
     [SerializeField] private TextMeshProUGUI _Time_Text;
 
+    void Start()
+    {
+      
+    }
+    
     void Update()
     {
         Minutes_Hour_Core();
@@ -32,7 +39,10 @@ public class Time_Process : MonoBehaviour
     {
         // permet de confertir le temps de jeu minute pour une journée en seconde
         TimeData.CurrentTime += 1 * Time.deltaTime;
+        
+        float testsecond = TimeData.CurrentTime / TimeData.Day_Lengh_In_Real_Minutes * 24 * 60 * 60;
 
+        Debug.Log(testsecond);
         // permet de convertir le temps d'une journée dans le jeu défini en minute en seconde
         InGame_Day_In_Seconds = TimeData.Day_Lengh_In_Real_Minutes*60;
         
@@ -42,7 +52,6 @@ public class Time_Process : MonoBehaviour
 
         float t = TimeConverter * 24;
         
-       
         TimeData.Hours = (int)Math.Floor(t);
         t *= 60; 
         TimeData.Minutes = (int)Math.Floor(t%60);
@@ -90,9 +99,9 @@ public class Time_Process : MonoBehaviour
     {
         if (TimeData.month == 2)
         {
-            TimeData.month_Size = 29; 
+            TimeData.month_Size = 28; 
         }
-        else if (TimeData.month_Size == 30)
+        else if (TimeData.month_Size == 30 || TimeData.month_Size == 28)
         {
             TimeData.month_Size = 31; 
         }

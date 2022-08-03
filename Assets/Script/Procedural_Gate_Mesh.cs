@@ -5,8 +5,8 @@ using UnityEngine;
 public class Procedural_Gate_Mesh : MonoBehaviour
 {
 
-    private int _gate_Lenght = 2;
-    private int _gate_Hight = 2;
+    private int _gate_Lenght = 6;
+    private int _gate_Hight = 6;
     private float _gate_RealHight = 0.1f;
     private int _triangleIndex = 0;
 
@@ -38,13 +38,13 @@ public class Procedural_Gate_Mesh : MonoBehaviour
     private  void Creat_Vertice()
     {
             
-        vertice_Coordinate = new Vector3[(_gate_Lenght) * (_gate_Hight)];
+        vertice_Coordinate = new Vector3[(_gate_Lenght + 1) * (_gate_Hight + 1)];
 
         int verticeIndex = 0; 
         
-        for (int x = 0; x < _gate_Lenght; x++)
+        for (int x = 0; x < _gate_Lenght+1; x++)
         {
-            for (int y = 0; y < _gate_Hight; y++)
+            for (int y = 0; y < _gate_Hight+1; y++)
             {
               
                 vertice_Coordinate[verticeIndex] = new Vector3(x, _gate_RealHight, y);
@@ -67,12 +67,12 @@ public class Procedural_Gate_Mesh : MonoBehaviour
             {
                 if (x < _gate_Lenght && y < _gate_Hight)
                 {
-                    TriangleIndexation(y, y+1, y+_gate_Lenght);
-                    TriangleIndexation(y+1, y+_gate_Lenght+1, y+_gate_Lenght);
+                    TriangleIndexation(y, y+1, y+_gate_Lenght+1);
+                    TriangleIndexation(y+1, y+_gate_Lenght+2, y+_gate_Lenght+1);
+
+          
                     
                     Debug.Log("Indexation faite");
-                  
-                    _triangleIndex += 3; 
                 }
                  
             }
@@ -85,6 +85,8 @@ public class Procedural_Gate_Mesh : MonoBehaviour
         Triangles[_triangleIndex] = a; 
         Triangles[_triangleIndex+1] = b; 
         Triangles[_triangleIndex+2] = c; 
+        
+        _triangleIndex += 3; 
         
         Debug.Log(a+" , "+ b + " " + c) ;
     }

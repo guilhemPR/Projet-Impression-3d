@@ -14,14 +14,14 @@ public static class TimeData
     public static int Minutes;
     
     
-    public static int Hours;
+    public static int Hours = 0;
     public static int hours_modifier = 0; 
 
     public static int day = 29;
     public static int day_Name_index = 4;
 
-    public static int month = 6;
-    public static int month_Size = 30; 
+    public static int month = 2;
+    public static int month_Size = 28; 
     
     
     public static int Years = 2022;
