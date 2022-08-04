@@ -65,8 +65,7 @@ public class Time_Process : MonoBehaviour
     {
         if (timeData.Hours >= 24 )
         {
-            Time.timeScale = 0;
-            
+
             timeData.day++;
             timeData.day_Name_index++;
 
