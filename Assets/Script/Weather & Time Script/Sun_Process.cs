@@ -6,17 +6,19 @@ using UnityEngine.Assertions.Comparers;
 
 public class Sun_Process : MonoBehaviour
 {
+    public TimeData timeData; 
+    
     [SerializeField] private Transform Sun_Transform;
     [SerializeField] private Light Sun_Light;
     private float sun_Rotation_Speed;
 
     void Start()
     {
-        float adaptedRotationToTime = (TimeData.Minutes + (((float)TimeData.hours_modifier+18)*60))/1440 ;
+        float adaptedRotationToTime = (timeData.Minutes + (((float)timeData.Hours+18)*60))/1440 ;
         
         Sun_Transform.eulerAngles = new Vector3( (360 * (adaptedRotationToTime)), Sun_Transform.eulerAngles.y, Sun_Transform.eulerAngles.z);
 
-        sun_Rotation_Speed =  360 / TimeData.Day_Lengh_In_Real_Minutes / 60; 
+        sun_Rotation_Speed =  (float)360 / timeData.Day_Lengh_In_Real_Minutes / 60; 
     }
 
     void Update()

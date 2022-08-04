@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 
 public class Time_Process : MonoBehaviour
 {
-
+    public TimeData timeData; 
  
     private float InGame_Day_In_Seconds;
     private float TimeConverter;
@@ -22,9 +22,13 @@ public class Time_Process : MonoBehaviour
     private float testsecond; 
     [SerializeField] private TextMeshProUGUI _Time_Text;
 
+    private float Real_Second_Of_Simulat_Hour;
+    private float Real_Second_Of_Simulat_Minute;
+
     void Start()
     {
-      
+         Real_Second_Of_Simulat_Hour = (((float)60 / 24) * timeData.Day_Lengh_In_Real_Minutes);
+         Real_Second_Of_Simulat_Minute = Real_Second_Of_Simulat_Hour / 60; 
     }
     
     void Update()
@@ -38,49 +42,51 @@ public class Time_Process : MonoBehaviour
     private void Minutes_Hour_Core()
     {
         // permet de confertir le temps de jeu minute pour une journée en seconde
-        TimeData.CurrentTime += 1 * Time.deltaTime;
+        timeData.CurrentTime += 1 * Time.deltaTime;
         
-        float testsecond = TimeData.CurrentTime / TimeData.Day_Lengh_In_Real_Minutes * 24 * 60 * 60;
+      
 
-        Debug.Log(testsecond);
-        // permet de convertir le temps d'une journée dans le jeu défini en minute en seconde
-        InGame_Day_In_Seconds = TimeData.Day_Lengh_In_Real_Minutes*60;
+        if (timeData.CurrentTime >= Real_Second_Of_Simulat_Minute)
+        {
+            timeData.CurrentTime = 0 + (timeData.CurrentTime - Real_Second_Of_Simulat_Minute);
+            timeData.Minutes++;
+        }
         
-        // permet de deiviser une seconde réel en 
-        TimeConverter = (TimeData.CurrentTime / InGame_Day_In_Seconds);
-   
-
-        float t = TimeConverter * 24;
+        if (timeData.Minutes >= 60)
+        {
+            timeData.Minutes = 0; 
+            timeData.Hours++;
+        }
         
-        TimeData.Hours = (int)Math.Floor(t);
-        t *= 60; 
-        TimeData.Minutes = (int)Math.Floor(t%60);
+        
     }
 
     private void Day_Month_Year_Changer()
     {
-        if (TimeData.Hours >= 24 )
+        if (timeData.Hours >= 24 )
         {
-            TimeData.day++;
-            TimeData.day_Name_index++;
+            Time.timeScale = 0;
+            
+            timeData.day++;
+            timeData.day_Name_index++;
 
-            TimeData.CurrentTime = 0;
+            timeData.Hours = 0;
 
-            if (TimeData.day_Name_index > 7)
+            if (timeData.day_Name_index > 7)
             {
-                TimeData.day_Name_index = 1; 
+                timeData.day_Name_index = 1; 
             }
 
-            if (TimeData.day >= TimeData.month_Size)
+            if (timeData.day >= timeData.month_Size)
             {
-                TimeData.day = 1;
-                TimeData.month++;
+                timeData.day = 1;
+                timeData.month++;
                 Julian_Month_Size_Changer();
 
-                if (TimeData.month >= 12 ) 
+                if (timeData.month >= 12 ) 
                 {
-                    TimeData.month = 1; 
-                    TimeData.Years++;
+                    timeData.month = 1; 
+                    timeData.Years++;
                    
                 }
             }
@@ -89,25 +95,25 @@ public class Time_Process : MonoBehaviour
     
     private void Time_Display()
     {
-        ClockString = string.Format("{0:00}h{1:00}", TimeData.Hours, TimeData.Minutes) ;
-        _Time_Text.text = ClockString + "    " + TimeData.day_Names_Dictionary[TimeData.day_Name_index] + " " + TimeData.day + " " +TimeData
-            .Month_Names_Dictionary[TimeData.month] + " " + TimeData.Years;
+        ClockString = string.Format("{0:00}h{1:00}", timeData.Hours, timeData.Minutes) ;
+        _Time_Text.text = ClockString + "    " + MonthData.day_Names_Dictionary[timeData.day_Name_index] + " " + timeData.day + " " +MonthData
+            .Month_Names_Dictionary[timeData.month] + " " + timeData.Years;
 
     }
 
     private void Julian_Month_Size_Changer()
     {
-        if (TimeData.month == 2)
+        if (timeData.month == 2)
         {
-            TimeData.month_Size = 28; 
+            timeData.month_Size = 28; 
         }
-        else if (TimeData.month_Size == 30 || TimeData.month_Size == 28)
+        else if (timeData.month_Size == 30 || timeData.month_Size == 28)
         {
-            TimeData.month_Size = 31; 
+            timeData.month_Size = 31; 
         }
         else
         {
-            TimeData.month_Size = 30; 
+            timeData.month_Size = 30;
         }
         
        
