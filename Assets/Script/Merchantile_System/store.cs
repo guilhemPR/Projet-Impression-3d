@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class store : Reserve
 {
-    // Start is called before the first frame update
+    //public items[] items = {yellow_roll,blue_roll,red_roll,stockage,printer};
+    Dictionary<string,int> item_to_purchase = new Dictionary<string,int>();
+    public int[] price = {25,50,75,150,350};
+
     void Start()
     {
-        
+
+        item_to_purchase.Add("yellow_roll",25);
+        item_to_purchase.Add("blue_roll",50);
+        item_to_purchase.Add("red_roll",75);
+        item_to_purchase.Add("stockage",150);
+        item_to_purchase.Add("printer",350);
+
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+
     }
 }

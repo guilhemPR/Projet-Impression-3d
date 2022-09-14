@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Purchase_action : MonoBehaviour
+public class Purchase_action : store
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public int playerMoney = 100;
+    
+
+    public void Purchase_Yellow_Roll(string ballec)
     {
-        
+        if (playerMoney >= 25)
+        {
+            playerMoney -= price[0];
+            item_in_stock[0] += 1;
+        }
     }
 }
