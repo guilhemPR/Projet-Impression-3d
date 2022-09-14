@@ -7,8 +7,9 @@ public class Reserve : MonoBehaviour
 {
     //manage the player's item stockage
 
-    protected Dictionary<string,int> item_stocked = new Dictionary<string,int>();
-    public static int[] item_in_stock = {0,0,0,0,0};
+    public Dictionary<string,int> item_stocked = new Dictionary<string,int>();
+    
+    public int[] item_in_stock = {0,0,0,0,0};
 
     void Start()
     {
@@ -19,9 +20,5 @@ public class Reserve : MonoBehaviour
         item_stocked.Add("printer",0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+  
 }
