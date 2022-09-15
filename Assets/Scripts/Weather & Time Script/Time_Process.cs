@@ -12,6 +12,12 @@ using UnityEngine.UIElements;
 
 public class Time_Process : MonoBehaviour
 {
+    
+    public delegate void TimeRefresh();
+
+    public static event TimeRefresh TimeIsRefresh; 
+
+    
     public TimeData timeData; 
  
     private float InGame_Day_In_Seconds;
@@ -54,8 +60,15 @@ public class Time_Process : MonoBehaviour
         
         if (timeData.Minutes >= 60)
         {
+            
+            
             timeData.Minutes = 0; 
             timeData.Hours++;
+            
+            if (TimeIsRefresh != null)
+            {
+                TimeIsRefresh();
+            }
         }
         
         

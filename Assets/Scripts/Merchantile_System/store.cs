@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 public class store : Reserve
 {
     //public items[] items = {yellow_roll,blue_roll,red_roll,stockage,printer};
-    Dictionary<string,int> item_to_purchase = new Dictionary<string,int>();
+    [ReadOnly] public static Dictionary<string,int> item_to_purchase = new Dictionary<string,int>();
     public int[] price = {25,50,75,150,350};
 
     void Start()
